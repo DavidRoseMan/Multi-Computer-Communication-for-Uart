@@ -64,13 +64,11 @@ bit transmit_receive(unsigned char xdata *arr_receive, unsigned char sizeofarr_r
     return receive_notfinish;
 }
 
-void transmit_get(unsigned char xdata *arr_receive, unsigned char xdata *arr_get, unsigned char sizeofarr)
+void transmit_get(unsigned char xdata *arr_receive, unsigned char xdata *arr_get, unsigned char sizeofarr_get)
 {
     unsigned char i = 0;
 
-    for (i = 0; i < sizeofarr; i++) {
+    for (i = 0; i < sizeofarr_get; i++) {
         arr_get[i] = arr_receive[2 * i];
     }
-    Send_UART(arr_get[0]);
-    Send_UART(arr_get[1]);
 }
