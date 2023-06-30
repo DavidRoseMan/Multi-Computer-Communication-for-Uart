@@ -11,7 +11,6 @@ void transmit_send(unsigned char xdata *arr, unsigned char sizeofarr, unsigned c
 
     do {
         head = (unsigned char)rand();
-        rand();
     } while (head == tail_bak);
     Send_UART(head);
     Send_UART(head + 1);
