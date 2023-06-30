@@ -8,6 +8,9 @@
     "files": [
       {
         "path": "transmit.c"
+      },
+      {
+        "path": "transmit.h"
       }
     ],
     "folders": []
