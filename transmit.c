@@ -30,7 +30,7 @@ bit transmit_receive(unsigned char xdata *arr_receive, unsigned char sizeofarr_r
 {
     static unsigned char xdata datahead_bak0 = 0, datahead_bak1 = 0, datahead_bak2 = 0;
     static unsigned char xdata datahead0 = 0, datahead1 = 0;
-    static unsigned char xdata ptt = 0;//point to tail
+    static unsigned char xdata ptt = 0xff;//point to tail
 
     datahead_bak0 = datahead_bak1;
     datahead_bak1 = datahead_bak2;
