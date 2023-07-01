@@ -30,35 +30,35 @@ bit transmit_receive(unsigned char xdata *arr_receive, unsigned char sizeofarr_r
 {
     static unsigned char xdata datahead_bak0 = 0, datahead_bak1 = 0, datahead_bak2 = 0;
     static unsigned char xdata datahead0 = 0, datahead1 = 0;
-    static unsigned char xdata p_head = 0;
+    static unsigned char xdata ptt = 0;//point to tail
 
     datahead_bak0 = datahead_bak1;
     datahead_bak1 = datahead_bak2;
     datahead_bak2 = Buffer_Receive_Uart;
     //----------------------------------------------------------------
-    if (p_head == 1) {
+    if (ptt == 1) {
         datahead0 = Buffer_Receive_Uart;
-    } else if (p_head == 2) {
+    } else if (ptt == 2) {
         datahead1 = Buffer_Receive_Uart;
         if (datahead0 != addr || datahead0 != ~datahead1) {
-            p_head = 0xff;
+            ptt = 0xff;
         }
     }
-    if (p_head >= 3 && p_head <= (sizeofarr_receive + 2)) {
-        arr_receive[p_head - 3] = Buffer_Receive_Uart;
-        if (p_head % 2 == 0) {
-            if (arr_receive[p_head - 3] != ~arr_receive[p_head - 4]) p_head = 0xff;
+    if (ptt >= 3 && ptt <= (sizeofarr_receive + 2)) {
+        arr_receive[ptt - 3] = Buffer_Receive_Uart;
+        if (ptt % 2 == 0) {
+            if (arr_receive[ptt - 3] != ~arr_receive[ptt - 4]) ptt = 0xff;
         }
     }
-    if (p_head == (sizeofarr_receive + 2)) {
-        p_head = 0xff;
+    if (ptt == (sizeofarr_receive + 2)) {
+        ptt = 0xff;
         return receive_finish;
     }
     //-----------------------------------------------------------------
     if ((datahead_bak0 + 1 == datahead_bak1) && (datahead_bak1 + 1 == datahead_bak2)) {
-        p_head = 0;
+        ptt = 0;
     }
-    if (p_head != 0xff) p_head++;
+    if (ptt != 0xff) ptt++;
 
     return receive_notfinish;
 }
