@@ -11,10 +11,10 @@ void transmit_send(unsigned char xdata *arr, unsigned char sizeofarr, unsigned c
 
     do {
         head = (unsigned char)rand();
-    } while (head == tail_bak);
+    } while (head == tail_bak+2);
     Send_UART(head);
-    Send_UART(head + 1);
     Send_UART(head + 2);
+    Send_UART(head + 4);
     Send_UART(addr);
     Send_UART(~addr);
     for (i = 0; i < sizeofarr; i++) {
@@ -55,7 +55,7 @@ bit transmit_receive(unsigned char xdata *arr_receive, unsigned char sizeofarr_r
         return receive_finish;
     }
     //-----------------------------------------------------------------
-    if ((datahead_bak0 + 1 == datahead_bak1) && (datahead_bak1 + 1 == datahead_bak2)) {
+    if ((datahead_bak0 + 2 == datahead_bak1) && (datahead_bak1 + 2 == datahead_bak2)) {
         ptt = 0;
     }
     if (ptt != 0xff) ptt++;
