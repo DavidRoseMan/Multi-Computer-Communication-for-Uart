@@ -20,7 +20,7 @@ bit transmit_receive(unsigned char xdata *arr_receive, unsigned char sizeofarr_r
 void transmit_get(unsigned char xdata *arr_receive, unsigned char xdata *arr_get, unsigned char sizeofarr_get);
 //----------------------------------------------------------------------------------------
 void init_Uart(Uart_type *example, unsigned char *Buffer, unsigned char sizeofbuffer);
-void Send_UART(Uart_type *example, unsigned char Data);
+void mySend_UART(Uart_type *example, unsigned char Data);
 void UART_Process_Send(Uart_type *example, unsigned char number_uart);
 void UART_Process_Send_ITR(Uart_type *example, unsigned char number_uart);
 

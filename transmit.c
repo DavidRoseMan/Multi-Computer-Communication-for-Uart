@@ -5,7 +5,7 @@
 void transmit_send(Uart_type *example, unsigned char xdata *arr, \
                    unsigned char sizeofarr, unsigned char addr)
 {
-    extern void Send_UART(Uart_type * example, unsigned char Data);
+    extern void mySend_UART(Uart_type * example, unsigned char Data);
 
     unsigned char i;
     unsigned char head = 0;
@@ -13,14 +13,14 @@ void transmit_send(Uart_type *example, unsigned char xdata *arr, \
     do {
         head = (unsigned char)rand();
     } while (head == example->tail_bak + 2);
-    Send_UART(example, head);
-    Send_UART(example, head + 2);
-    Send_UART(example, head + 4);
-    Send_UART(example, addr);
-    Send_UART(example, ~addr);
+    mySend_UART(example, head);
+    mySend_UART(example, head + 2);
+    mySend_UART(example, head + 4);
+    mySend_UART(example, addr);
+    mySend_UART(example, ~addr);
     for (i = 0; i < sizeofarr; i++) {
-        Send_UART(example, arr[i]);
-        Send_UART(example, ~arr[i]);
+        mySend_UART(example, arr[i]);
+        mySend_UART(example, ~arr[i]);
         if (i == sizeofarr - 1) {
             example->tail_bak = ~arr[i];
         }
@@ -87,7 +87,7 @@ void init_Uart(Uart_type *example, unsigned char *Buffer, unsigned char sizeofbu
     example->tail_bak     = 0;
 }
 
-void Send_UART(Uart_type *example, unsigned char Data)
+void mySend_UART(Uart_type *example, unsigned char Data)
 {
     unsigned char i;
 
