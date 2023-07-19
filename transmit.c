@@ -5,7 +5,7 @@
 void transmit_send(Uart_type *example, unsigned char xdata *arr, \
                    unsigned char sizeofarr, unsigned char addr)
 {
-    extern void mySend_UART(Uart_type * example, unsigned char Data);
+    extern void mySend_UART(Uart_type * example, unsigned char Data) reentrant;
 
     unsigned char i;
     unsigned char head = 0;
@@ -87,7 +87,7 @@ void init_Uart(Uart_type *example, unsigned char *Buffer, unsigned char sizeofbu
     example->tail_bak     = 0;
 }
 
-void mySend_UART(Uart_type *example, unsigned char Data)
+void mySend_UART(Uart_type *example, unsigned char Data) reentrant
 {
     unsigned char i;
 
@@ -154,14 +154,15 @@ void UART_Process_Send_ITR(Uart_type *example, unsigned char number_uart)
             example->i++;
             if (number_uart == 1)
                 SBUF = example->Buffer[example->i];
-            else if (number_uart == 1)
+            else if (number_uart == 2)
                 S2BUF = example->Buffer[example->i];
-            else if (number_uart == 1)
+            else if (number_uart == 3)
                 S3BUF = example->Buffer[example->i];
-            else if (number_uart == 1)
+            else if (number_uart == 4)
                 S4BUF = example->Buffer[example->i];
         } else {
             example->timer_100us = 255;
         }
     }
+
 }
