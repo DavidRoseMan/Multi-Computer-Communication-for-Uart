@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "variable.h"
 
-void transmit_send(Uart_type *example, unsigned char xdata *arr, \
+void transmit_send(Uart_type *example, unsigned char xdata *arr,
                    unsigned char sizeofarr, unsigned char addr)
 {
     extern void mySend_UART(Uart_type * example, unsigned char Data) reentrant;
@@ -27,7 +27,7 @@ void transmit_send(Uart_type *example, unsigned char xdata *arr, \
     }
 }
 
-bit transmit_receive(unsigned char xdata *arr_receive, unsigned char sizeofarr_receive, \
+bit transmit_receive(unsigned char xdata *arr_receive, unsigned char sizeofarr_receive,
                      unsigned char addr, unsigned char Buffer_Receive_Uart)
 {
     static unsigned char xdata arr_datahead_bak[3] = {0};
@@ -77,7 +77,7 @@ void transmit_get(unsigned char xdata *arr_receive, unsigned char xdata *arr_get
 
 //--------------------------·¢ËÍ-------------------------------------------------------------
 
-void init_Uart(Uart_type *example, unsigned char *Buffer, unsigned char sizeofbuffer)
+void init_Uart(Uart_type *example, unsigned char xdata *Buffer, unsigned char sizeofbuffer)
 {
     example->i            = 0;
     example->end          = 0;
@@ -164,5 +164,4 @@ void UART_Process_Send_ITR(Uart_type *example, unsigned char number_uart)
             example->timer_100us = 255;
         }
     }
-
 }
