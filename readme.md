@@ -1,27 +1,38 @@
-é€‚ç”¨äºå¤šæœºä¸²å£é€šä¿¡
-* å‘é€ç«¯å‡½æ•°ï¼š
-    * void transmit_send(unsigned char xdata *arr, unsigned char sizeofarr, unsigned char addr);
-* æ¥æ”¶ç«¯å‡½æ•°ï¼š
-    * bit transmit_receive(unsigned char xdata *arr_receive, unsigned char sizeofarr_receive, unsigned char addr, unsigned char Buffer_Receive_Uart);
-    * void transmit_get(unsigned char xdata *arr_receive, unsigned char xdata *arr_get, unsigned char sizeofarr_get);
+# ¿ìËÙ½¨Á¢´®¿Ú·¢ËÍ»º´æÇøÒÔ¼°Í¨¹ı»º´æÇø·¢ËÍ¿ÉÑ°Ö·µÄÊı¾İ°ü
 
-å‡½æ•°å‚æ•°è¯´æ˜ï¼š
-1. tranmit_sendå‡½æ•°ï¼š
-    * arr: å‘é€çš„æ•°æ®æ•°ç»„ã€‚
-    * sizeofarr: æ•°ç»„ä¸­çš„å…ƒç´ ä¸ªæ•°ã€‚
-    * addr: æ¥æ”¶ç«¯åœ°å€
-2. transimit_receiveå‡½æ•°ï¼š 
-    * arr_receive: å¤„ç†æ¥æ”¶åˆ°çš„æ•°æ®çš„ä¸­é—´å±‚ã€‚
-    * sieofarr_receive: ä¸­é—´å±‚æ•°ç»„ä¸­å…ƒç´ çš„ä¸ªæ•°,å…¶å¤§å°åº”è¯¥ä¸ºå‘é€çš„æ•°æ®æ•°ç»„çš„ä¸¤å€ã€‚ 
-    * addr: æ¥æ”¶ç«¯åœ°å€ã€‚ 
-    * Buffer_Receive_Uart: ä¸²å£ç¼“å†²åŒºï¼Œä¾‹å¦‚51çš„ä¸²å£1ä¸ºSBUFã€‚
-3. transimit_getå‡½æ•°ï¼š
-    * arr_receive: å³æ˜¯tranmit_receiveå‡½æ•°ä¸­çš„arr_receiveã€‚
-    * arr_get: ç”¨äºå­˜å‚¨æ¥æ”¶åˆ°çš„æ•°æ®çš„æ•°ç»„ã€‚
-    * sizeofarr_get: arr_getä¸­å…ƒç´ çš„ä¸ªæ•°ã€‚
+## ¿ìËÙ½¨Á¢´®¿Ú·¢ËÍ»º´æÇø
 
-ä¾‹å­ï¼š
-1. å‘é€ç«¯ï¼š
-    transmit_send(...);
-2. æ¥æ”¶ç«¯ï¼š
-    if(transmit_receive(...))transmit_get(...); //åœ¨å¯¹æ•°æ®çš„æœ€åä¸€ä½æ ¡éªŒæˆåŠŸåï¼Œtransmit_getå‡½æ•°ä¼šè¿”å›receive_finish,å…¶ä½™æ—¶å€™åˆ™è¿”å›receive_notfinishã€‚
+```c
+Uart_type uart_example;//´´½¨Ò»¸ö»º´æÇø¶ÔÏó
+unsigned char xdata uart_example_send_buffer[128];//´´½¨µÄ»º´æÇøµÄ´óĞ¡Îª128×Ö½Ú¡£
+
+UART_Process_Send(& uart_example, 1or2or3or4)//´Ëº¯Êı100usÖ´ĞĞÒ»´Î£¬ÇÒ´Ë¶ÔÏóÓë´®¿Ú1or2or3or4Ïà¹ØÁª¡£
+UART_Process_Send_ITR(& uart_example, 1or2or3or4)//´Ëº¯Êı·ÅÈëÏàÓ¦µÄ´®¿ÚÖĞ¶Ï·şÎñº¯ÊıÖĞ¡£
+
+
+int main(void)
+{
+    init_Uart(&uart_example,uart_example_send_buffer,sizeof uart_example_send_buffer);//³õÊ¼»¯´Ë¶ÔÏó¡£
+}
+```
+
+## Í¨¹ı»º´æÇø·¢ËÍ¿ÉÑ°Ö·µÄÊı¾İ°ü
+
+* ·¢ËÍ¶Ë
+```c
+unsigned char xdata package[10];//Êı¾İ°üµÄÊı¾İ´óĞ¡Îª10×Ö½Ú¡£
+transmit_send(uart_example,package,10,123);//½«´ËÊı¾İ°üÍ¨¹ıuart_exampleËù¹ØÁªµÄ´®¿Ú·¢ËÍ³öÈ¥£¬·¢ËÍµÄ¶ÔÏóÎªµØÖ·Îª123¡£
+```
+
+* ½ÓÊÕ¶Ë
+```c
+unsigned char xdata package_receive_buffer[20];//´´½¨Ò»¸öÊı¾İ°ü½ÓÊÕµÄ»º´æÇø£¬´Ë»º´æÇøµÄ´óĞ¡Ó¦¸ÃÎª20×Ö½Ú¡£
+unsigned char xdata package_receive[10];//½ÓÊÕµÄÊı¾İ¾­¹ıÊı¾İ°ü½ÓÊÕ»º´æÇøµÄ´¦Àí£¬×îÖÕ»á·ÅÈë´ËÊı×éÖĞ¡£
+
+//ÔÚÏàÓ¦µÄ´®¿ÚÖĞ¶Ï·şÎñº¯ÊıÖĞ£º
+if (½ÓÊÕ±ê¼ÇÎ» == 1) {
+        ½ÓÊÕ±ê¼ÇÎ» = 0;
+        if (transmit_receive(package_receive_buffer,20,123,´®¿ÚÓ²¼ş½ÓÊÕ»º´æÇø))//123Ó¦Óë·¢ËÍ¶ËµÄµØÖ·Ò»ÖÂ£¬´®¿ÚÓ²¼ş½ÓÊÕ»º´æÇøÎªSBUFµÈµÈ¡£
+            transmit_get(package_receive_buffer,package_recieve,10);//Êı¾İĞ£Ñé³É¹¦ºó£¬´Ëº¯Êı»á½«Êı¾İ°ü½ÓÊÕ»º´æÇøµÄÊı¾İ¾­¹ı´¦Àíºó·ÅÈë´ËÊı×éÖĞ¡£
+    }
+```

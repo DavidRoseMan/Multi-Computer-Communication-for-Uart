@@ -2,13 +2,13 @@
 #include <stdlib.h>
 #include "variable.h"
 
-void transmit_send(Uart_type *example, unsigned char xdata *arr,
+void transmit_send(Uart_type *example, unsigned char xdata *arr, \
                    unsigned char sizeofarr, unsigned char addr)
 {
     extern void mySend_UART(Uart_type * example, unsigned char Data) reentrant;
 
-    unsigned char i;
-    unsigned char head = 0;
+    unsigned char xdata i;
+    unsigned char xdata head = 0;
 
     do {
         head = (unsigned char)rand();
@@ -27,7 +27,7 @@ void transmit_send(Uart_type *example, unsigned char xdata *arr,
     }
 }
 
-bit transmit_receive(unsigned char xdata *arr_receive, unsigned char sizeofarr_receive,
+bit transmit_receive(unsigned char xdata *arr_receive, unsigned char sizeofarr_receive, \
                      unsigned char addr, unsigned char Buffer_Receive_Uart)
 {
     static unsigned char xdata arr_datahead_bak[3] = {0};
@@ -68,7 +68,7 @@ bit transmit_receive(unsigned char xdata *arr_receive, unsigned char sizeofarr_r
 
 void transmit_get(unsigned char xdata *arr_receive, unsigned char xdata *arr_get, unsigned char sizeofarr_get)
 {
-    unsigned char i = 0;
+    unsigned char xdata i = 0;
 
     for (i = 0; i < sizeofarr_get; i++) {
         arr_get[i] = arr_receive[2 * i];
@@ -89,7 +89,7 @@ void init_Uart(Uart_type *example, unsigned char xdata *Buffer, unsigned char si
 
 void mySend_UART(Uart_type *example, unsigned char Data) reentrant
 {
-    unsigned char i;
+    unsigned char xdata i;
 
     i = example->end;
     if (i >= example->i) {
@@ -129,7 +129,7 @@ void UART_Process_Send(Uart_type *example, unsigned char number_uart)
 
 void UART_Process_Send_ITR(Uart_type *example, unsigned char number_uart)
 {
-    unsigned char a;
+    unsigned char xdata a;
 
     if (number_uart == 1)
         a = SCON;
@@ -164,4 +164,5 @@ void UART_Process_Send_ITR(Uart_type *example, unsigned char number_uart)
             example->timer_100us = 255;
         }
     }
+
 }
