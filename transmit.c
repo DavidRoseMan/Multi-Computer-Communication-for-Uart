@@ -89,7 +89,7 @@ void init_Uart(Uart_type *example, unsigned char xdata *Buffer, unsigned char si
 
 void mySend_UART(Uart_type *example, unsigned char Data) reentrant
 {
-    unsigned char xdata i;
+    unsigned char i;
 
     i = example->end;
     if (i >= example->i) {
