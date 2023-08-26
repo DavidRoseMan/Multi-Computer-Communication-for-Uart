@@ -75,7 +75,7 @@ void transmit_get(unsigned char xdata *arr_receive, unsigned char xdata *arr_get
     }
 }
 
-//--------------------------·¢ËÍ-------------------------------------------------------------
+//--------------------------Â·Â¢Ã‹Ã-------------------------------------------------------------
 
 void init_Uart(Uart_type *example, unsigned char xdata *Buffer, unsigned char sizeofbuffer)
 {
@@ -151,7 +151,10 @@ void UART_Process_Send_ITR(Uart_type *example, unsigned char number_uart)
             S4CON &= ~0x02;
         example->timer_100us = 0;
         if (example->i != example->end) {
-            example->i++;
+            if(example->i < example ->sizeodBuffer-1)
+                example->i++;
+            else
+                example->i = 0;
             if (number_uart == 1)
                 SBUF = example->Buffer[example->i];
             else if (number_uart == 2)
