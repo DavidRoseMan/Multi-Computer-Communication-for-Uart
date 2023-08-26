@@ -151,7 +151,7 @@ void UART_Process_Send_ITR(Uart_type *example, unsigned char number_uart)
             S4CON &= ~0x02;
         example->timer_100us = 0;
         if (example->i != example->end) {
-            if(example->i < example ->sizeodBuffer-1)
+            if(example->i < example ->sizeofBuffer-1)
                 example->i++;
             else
                 example->i = 0;
