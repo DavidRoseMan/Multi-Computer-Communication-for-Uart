@@ -1,6 +1,7 @@
 #include "transmit.h"
 #include <stdlib.h>
 #include "variable.h"
+#include <STDARG.H>
 
 void transmit_send(Uart_type *example, unsigned char xdata *arr, \
                    unsigned char sizeofarr, unsigned char addr)
@@ -163,3 +164,45 @@ void UART_Process_Send_ITR(Uart_type *example, unsigned char number_uart)
     }
 
 }
+
+void myprintf(Uart_type *uart_example, char *str, ...) reentrant
+{
+    char *char_temp;
+    va_list ap;
+    unsigned int i;
+    unsigned int number_get;
+    unsigned char head_flag; // print start from the number's head_value which is not zero.
+
+    char_temp = str;
+    va_start(ap, str);
+    while (*char_temp != '\0') {
+        if (*char_temp != '%') {
+            mySend_UART(uart_example, (unsigned char)*char_temp);
+            char_temp++;
+        } else {
+            char_temp++;
+            if (*char_temp != 'd') {
+                mySend_UART(uart_example, (unsigned char)'%');
+                mySend_UART(uart_example, (unsigned char)*char_temp);
+                char_temp++;
+                continue;
+            } else if (*char_temp == '\0') {
+                mySend_UART(uart_example, (unsigned char)'%');
+                break;
+            }
+            number_get = va_arg(ap, unsigned int);
+            i          = 10000;
+            head_flag  = 1;
+            while (i) {
+                if (number_get / i != 0) head_flag = 0;
+                if (!head_flag)
+                    mySend_UART(uart_example, (unsigned char)('0' + number_get / i));
+                number_get %= i;
+                i /= 10;
+            }
+            char_temp++;
+        }
+    }
+    va_end(ap);
+}
+
