@@ -36,3 +36,9 @@ if (接收标记位 == 1) {
             transmit_get(package_receive_buffer,package_recieve,10);//数据校验成功后，此函数会将数据包接收缓存区的数据经过处理后放入此数组中。
     }
 ```
+
+## myprintf函数
+
+```c
+void myprintf(Uart_type *example, char *str, ...) reentrant;
+```
