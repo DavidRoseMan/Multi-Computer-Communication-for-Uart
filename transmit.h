@@ -23,6 +23,8 @@ void init_Uart(Uart_type *example, unsigned char xdata *Buffer, unsigned char si
 void mySend_UART(Uart_type *example, unsigned char Data) reentrant;
 void UART_Process_Send(Uart_type *example, unsigned char number_uart);
 void UART_Process_Send_ITR(Uart_type *example, unsigned char number_uart);
+//-----------------------------------------------------------------------------------------
+void myprintf(Uart_type *uart_example, char *str, ...) reentrant;
 
 #endif
 
