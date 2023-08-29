@@ -200,7 +200,7 @@ void myprintf(Uart_type *uart_example, char *str, ...) reentrant
             i          = 10000;
             head_flag  = 1;
             while (i) {
-                if (number_get / i != 0) head_flag = 0;
+                if (head_flag ==1 && number_get / i != 0) head_flag = 0;
                 if (!head_flag)
                     mySend_UART(uart_example, (unsigned char)('0' + number_get / i));
                 number_get %= i;
