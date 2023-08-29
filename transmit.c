@@ -181,20 +181,20 @@ void myprintf(Uart_type *uart_example, char *str, ...) reentrant
             char_temp++;
         } else {
             char_temp++;
-            if (*char_temp != 'd') {
+            if (*char_temp == '\0') {
+                mySend_UART(uart_example, (unsigned char)'%');
+                break;
+            } else if (*char_temp != 'd') {
                 mySend_UART(uart_example, (unsigned char)'%');
                 mySend_UART(uart_example, (unsigned char)*char_temp);
                 char_temp++;
                 continue;
-            } else if (*char_temp == '\0') {
-                mySend_UART(uart_example, (unsigned char)'%');
-                break;
             }
             number_get = va_arg(ap, unsigned int);
             i          = 10000;
             head_flag  = 1;
             while (i) {
-                if (number_get / i != 0) head_flag = 0;
+                if (head_flag == 1 && number_get / i != 0) head_flag = 0;
                 if (!head_flag)
                     mySend_UART(uart_example, (unsigned char)('0' + number_get / i));
                 number_get %= i;
