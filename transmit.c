@@ -187,14 +187,14 @@ void myprintf(Uart_type *uart_example, char *str, ...) reentrant
             char_temp++;
         } else {
             char_temp++;
-            if (*char_temp != 'd') {
+            if (*char_temp == '\0') {
+                mySend_UART(uart_example, (unsigned char)'%');
+                break;
+            } else if (*char_temp != 'd') {
                 mySend_UART(uart_example, (unsigned char)'%');
                 mySend_UART(uart_example, (unsigned char)*char_temp);
                 char_temp++;
                 continue;
-            } else if (*char_temp == '\0') {
-                mySend_UART(uart_example, (unsigned char)'%');
-                break;
             }
             number_get = va_arg(ap, unsigned int);
             i          = 10000;
